@@ -1,9 +1,9 @@
 window.dom = {};
 // 增加节点的操作
 dom.create = (string) => {
-    const container = document.createElement('tempalte');
+    const container = document.createElement('template');
     container.innerHTML = string.trim();
-    return container.firstChild;
+    return container.content.firstChild;
 }
 dom.after = (node, node2) => {
     const insertedNode = node.parentNode.insertBefore(node2, node.nextSibling)
@@ -23,6 +23,17 @@ dom.wrap = (node, parent) => {
 }
 // 删除节点操作
 dom.removed = (node) => {
-    node.remove() || node.parentNode.removeChild(node)
+    node.remove()
     return node;
 }
+dom.empty = (node) => {
+    let array = []
+    let x = node.firstChild
+    while (x) {
+        array.push(dom.removed(node.firstChild))
+        x = node.firstChild
+    }
+    return array;
+}
+// 修改节点操作
+dom.attr = () => {}
